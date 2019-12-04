@@ -16,6 +16,19 @@
    display: none;
  }
 
+<<<<<<< HEAD
  .project .active{
    background-color: #15a589;
+=======
+ .new-project-form, .new-todo-form {
+   margin: 0 auto;
+ }
+
+ .projects-col ul {
+  font-size: 1.5em;
+ }
+
+ .projects-col ul, .todos-col ul {
+  font-size: 1.2em;
+>>>>>>> 18fbb175bddb05fe16f64b49d5e1651654dbfa59
  }
