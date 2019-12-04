@@ -15,3 +15,7 @@
  .hidden {
    display: none;
  }
+
+ .project .active{
+   background-color: #15a589;
+ }

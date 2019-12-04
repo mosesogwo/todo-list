@@ -8,66 +8,74 @@
 </head>
 <body>
   <header>
-    <h1 class="text-center">My Todo App</h1>
+    <h1 class="text-center mt-3">My Todo App</h1>
   </header> 
   <main class="container">
     <div class="row mt-5">
-      <div class="col-3 text-center border-right"><h4><button type="button" class="btn btn-primary new-project">+</button> Projects</h4></div>
-      <div class="col-9 text-center border-left"><h4><button type="button" class="btn btn-primary new-todo">+</button> To-do List</h4></div>
+      <div class="col-3 text-center border-right">
+        <h4><button type="button" class="btn btn-primary new-project">+</button> Projects</h4>
+        <form class="new-project-form bg-primary text-light p-2 hidden">
+          <div class="form-group">
+            <label for="projectName">Name:</label>
+            <input type="text" class="form-control" id="projectName" placeholder="Enter project name" required>
+          </div>
+            <button type="submit" class="btn btn-primary btn-block">Create project</button>
+        </form>
+      </div>
+      <div class="col-9 border-left">
+        <h4 class="text-center"><button type="button" class="btn btn-primary new-todo">+</button> To-do List</h4>
+        <div class="forms flex-d justify-content-center">
+            <form class="new-todo-form bg-primary text-light p-2 hidden">
+                <div class="form-group">
+                  <label for="title">Title:</label>
+                  <input type="text" class="form-control" id="title" placeholder="Enter todo title">
+                </div>
+        
+                <div class="form-group">
+                  <label for="details">Details:</label>
+                  <textarea type="text" class="form-control" id="details" placeholder="Enter description of activity" rows="3"></textarea>
+                </div>
+        
+                <div class="form-group">
+                  <label for="date">Due Date:</label>
+                  <input type="date" class="form-control" id="date" placeholder="Enter due date"></textarea>
+                </div>
+        
+                <div class="form-group">
+                  <label for="priority">Priority</label>
+                  <select class="form-control" id="priority">
+                    <option value="low">Low</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+        
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+      
+          </div>
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-3 text-center border-right">
-          <ul>
-            <li>Project 1</li>
-            <li>Project 2</li>
-          </ul>
+      <div class="col-3 border-right">
+          <div class="mt-4 list-group project">
+            <a href="#" class="list-group-item list-group-item-action active">
+              Project 1 <span class="badge badge-primary badge-pill">3</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">Project 2
+                <span class="badge badge-primary badge-pill">1</span></a>
+            <a href="#" class="list-group-item list-group-item-action">Project 3 <span class="badge badge-primary badge-pill"></span></a>
+          </div>
       </div>
-      <div class="col-9 text-center border-left">
-          <ul>
-              <li>Todo 1</li>
-              <li>Todo 2</li>
-          </ul>
+      <div class="col-9 border-left list">
+          <div class="mt-4 list-group">
+              <a href="#" class="list-group-item list-group-item-action">List 1</a>
+              <a href="#" class="list-group-item list-group-item-action">List 2</a>
+              <a href="#" class="list-group-item list-group-item-action">List 3</a>
+            </div>
       </div>
     </div>
 
-    <div class="forms">
-      <form class="new-project-form w-25 bg-primary text-light p-2 hidden">
-        <div class="form-group">
-          <label for="projectName">Name:</label>
-          <input type="text" class="form-control" id="projectName" placeholder="Enter project name" required>
-        </div>
-          <button type="submit" class="btn btn-primary btn-block">Create project</button>
-      </form>
-
-      <form class="new-todo-form w-25 bg-primary text-light p-2 hidden">
-          <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" placeholder="Enter todo title">
-          </div>
-  
-          <div class="form-group">
-            <label for="details">Details:</label>
-            <textarea type="text" class="form-control" id="details" placeholder="Enter description of activity" rows="3"></textarea>
-          </div>
-  
-          <div class="form-group">
-            <label for="date">Due Date:</label>
-            <input type="date" class="form-control" id="date" placeholder="Enter due date"></textarea>
-          </div>
-  
-          <div class="form-group">
-            <label for="priority">Priority</label>
-            <select class="form-control" id="priority">
-              <option value="low">Low</option>
-              <option value="high">High</option>
-            </select>
-          </div>
-  
-          <button type="submit" class="btn btn-primary btn-block">Submit</button>
-      </form>
-
-    </div>
   </main>
   <script src="main.js"></script>
 </body>
