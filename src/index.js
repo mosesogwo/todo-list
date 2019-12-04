@@ -1,6 +1,6 @@
 import './style.css';
 import todo from './todo';
-import { project, save, setActiveProjectId } from './project';
+import { project, save, setActiveProjectId, getActiveProject } from './project';
 
 const pageLoad = () => {
   const newProjectBtn = document.querySelector('.new-project');
@@ -29,6 +29,17 @@ const pageLoad = () => {
 
   newTodoForm.addEventListener('submit', (event) => {
     event.preventDefault();
+    const title = newTodoForm.querySelector('#title').value;
+    const desc = newTodoForm.querySelector('#desc').value;
+    const date = newTodoForm.querySelector('#date').value;
+    const priority = newTodoForm.querySelector('#priority').value;
+
+    if (title !== "" && desc !== "" && date !== "" && priority !== "") {
+      const newTodo = todo(title, desc, date, priority);
+      let activeProject = getActiveProject();
+      activeProject.todos.push(newTodo);
+      save();
+    }
   });
 
   projectsContainer.addEventListener('click', (event) => {

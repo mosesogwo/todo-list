@@ -1,5 +1,5 @@
 const projects = JSON.parse(localStorage.getItem('projects_key')) || [];
-let activeProjectId = JSON.parse(localStorage.getItem('active_project_id_key'))
+let activeProjectId = JSON.parse(localStorage.getItem('active_project_id_key'));
 
 const project = (name) => {
   const todos = [];
@@ -14,6 +14,14 @@ const save = () => {
   localStorage.setItem('projects_key', JSON.stringify(projects));
   localStorage.setItem('active_project_id_key', JSON.stringify(activeProjectId));
   renderProjects();
+}
+
+const setActiveProjectId = (value) => {
+  activeProjectId = value;
+}
+
+const getActiveProject = () => {
+  return projects.find(project => project.id === activeProjectId);
 }
 
 const renderProjects = () => {
@@ -31,8 +39,13 @@ const renderProjects = () => {
   });
 }
 
-const setActiveProjectId = (value) => {
-  activeProjectId = value;
-}
+// const renderTodos = () => {
+//   const activeProject = projects.find(project => project.id === activeProjectId);
+//   activeProject.todos.forEach((todo) => {
+//     let template = document.createElement("a");
+//     template.classList.add("list-group-item", "list-group-item-action");
+//     template.innerHTML = `${todo.title}`;
+//   });
+// }
 
-export { project, projects, save, renderProjects, activeProjectId, setActiveProjectId };
+export { project, projects, save, renderProjects, activeProjectId, setActiveProjectId, getActiveProject};
