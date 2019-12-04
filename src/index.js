@@ -1,6 +1,6 @@
 import './style.css';
 import todo from './todo';
-import { project, projects, save, renderProjects, activeProjectId } from './project';
+import { project, save, setActiveProjectId } from './project';
 
 const pageLoad = () => {
   const newProjectBtn = document.querySelector('.new-project');
@@ -29,14 +29,14 @@ const pageLoad = () => {
 
   newTodoForm.addEventListener('submit', (event) => {
     event.preventDefault();
-  })
+  });
 
   projectsContainer.addEventListener('click', (event) => {
     if (event.target.tagName.toLowerCase() === "a") {
-      activeProjectId = event.target.dataset.id;
+      setActiveProjectId(event.target.dataset.id);
       save();
     }
-  })
+  });
 }
 
 pageLoad();

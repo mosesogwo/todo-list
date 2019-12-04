@@ -1,5 +1,5 @@
 const projects = JSON.parse(localStorage.getItem('projects_key')) || [];
-const activeProjectId = JSON.parse(localStorage.getItem('active_project_id_key'))
+let activeProjectId = JSON.parse(localStorage.getItem('active_project_id_key'))
 
 const project = (name) => {
   const todos = [];
@@ -31,4 +31,8 @@ const renderProjects = () => {
   });
 }
 
-export { project, projects, save, renderProjects, activeProjectId };
+const setActiveProjectId = (value) => {
+  activeProjectId = value;
+}
+
+export { project, projects, save, renderProjects, activeProjectId, setActiveProjectId };
