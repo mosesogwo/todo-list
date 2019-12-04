@@ -7,26 +7,35 @@
   <title>Todo-List</title>
 </head>
 <body>
-  <header>
+  <header class="mt-3">
     <h1 class="text-center">My Todo App</h1>
   </header> 
   <main class="container">
-    <div class="row mt-5">
+    <div class="row mt-5 border-bottom">
       <div class="col-3 text-center border-right"><h4><button type="button" class="btn btn-primary new-project">+</button> Projects</h4></div>
       <div class="col-9 text-center border-left"><h4><button type="button" class="btn btn-primary new-todo">+</button> To-do List</h4></div>
     </div>
 
     <div class="row">
-      <div class="col-3 text-center border-right">
+      <div class="col-3 text-center border-right projects-col">
           <ul>
             <li>Project 1</li>
             <li>Project 2</li>
           </ul>
       </div>
-      <div class="col-9 text-center border-left">
-          <ul>
-              <li>Todo 1</li>
-              <li>Todo 2</li>
+      <div class="col-9 text-center border-left todos-col">
+          <ul class="list-unstyled">
+              <li class="mb-5">
+                <div>Todo 1 - Due Date</div>
+                <div>Description</div>
+                <div>Priority</div>
+              </li>
+
+              <li>
+                <div>Todo 2 - Due Date</div>
+                <div>Description</div>
+                <div>Priority</div>
+              </li>
           </ul>
       </div>
     </div>
@@ -34,8 +43,8 @@
     <div class="forms">
       <form class="new-project-form w-25 bg-primary text-light p-2 hidden">
         <div class="form-group">
-          <label for="projectName">Name:</label>
-          <input type="text" class="form-control" id="projectName" placeholder="Enter project name" required>
+          <label for="project-name">Name:</label>
+          <input type="text" class="form-control" id="project-name" placeholder="Enter project name" required>
         </div>
           <button type="submit" class="btn btn-primary btn-block">Create project</button>
       </form>
