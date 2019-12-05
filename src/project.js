@@ -14,6 +14,7 @@ const save = () => {
   localStorage.setItem('projects_key', JSON.stringify(projects));
   localStorage.setItem('active_project_id_key', JSON.stringify(activeProjectId));
   renderProjects();
+  renderTodos();
 }
 
 const setActiveProjectId = (value) => {
@@ -39,13 +40,16 @@ const renderProjects = () => {
   });
 }
 
-// const renderTodos = () => {
-//   const activeProject = projects.find(project => project.id === activeProjectId);
-//   activeProject.todos.forEach((todo) => {
-//     let template = document.createElement("a");
-//     template.classList.add("list-group-item", "list-group-item-action");
-//     template.innerHTML = `${todo.title}`;
-//   });
-// }
+const renderTodos = () => {
+  const activeProject = projects.find(project => project.id === activeProjectId);
+  const todosDiv = document.querySelector('.todos');
+  activeProject.todos.forEach((todo) => {
+    let template = document.createElement("a");
+    template.setAttribute('href','#');
+    template.classList.add("list-group-item", "list-group-item-action");
+    template.innerHTML = `${todo.title}`;
+    todosDiv.appendChild(template);
+  });
+}
 
 export { project, projects, save, renderProjects, activeProjectId, setActiveProjectId, getActiveProject};
