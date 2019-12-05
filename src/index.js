@@ -8,7 +8,8 @@ const pageLoad = () => {
   const newTodoBtn = document.querySelector('.new-todo');
   const newTodoForm = document.querySelector('.new-todo-form');
   const projectsContainer = document.querySelector('.project');
-  const todosContainer = document.querySelector('.todos')
+  const todosContainer = document.querySelector('.list');
+  const editTodo = document.querySelector('.edit-todo')
 
   newProjectBtn.addEventListener('click', () => {
     newProjectForm.classList.toggle('hidden');
@@ -51,9 +52,17 @@ const pageLoad = () => {
   });
 
   todosContainer.addEventListener('click', (event) => {
-    if (event.target.tagName.toLowerCase() === "a") {
-      const details = event.target.querySelector('p');
+    if (event.target.tagName.toLowerCase() === "h4" || 
+    event.target.tagName.toLowerCase() === "p") {
+      const details = event.target.parentNode.querySelector('p');
       details.classList.toggle('hidden');
+    }
+
+    if (event.target.classList.contains("btn-success")) {
+      let activeProject = getActiveProject();
+      let idx = event.target.parentNode.parentNode.parentNode.id;
+      activeProject.todos[idx].toggleComplete();
+      save();
     }
   })
 }

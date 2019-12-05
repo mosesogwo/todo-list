@@ -19,3 +19,8 @@
  .project .active{
    background-color: #15a589;
  }
+
+.completed {
+  text-decoration: line-through;
+}
+ 

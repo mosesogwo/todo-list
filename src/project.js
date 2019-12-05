@@ -55,15 +55,26 @@ const renderTodos = () => {
   const activeProject = getActiveProject();
   const todosDiv = document.querySelector('.todos');
   clearContainer(todosDiv);
-  activeProject.todos.forEach((todo) => {
+  activeProject.todos.forEach((todo, idx) => {
     let template = document.createElement("a");
     template.setAttribute('href','#');
+    template.setAttribute('id', `${ idx }`);
     template.classList.add("list-group-item", "list-group-item-action");
-    template.innerHTML = `${ todo.title }`;
+    template.innerHTML = `<h4>${ todo.title }</h4>`;
     let details = document.createElement("p");
     details.classList.add("hidden");
-    details.innerText = "Description here \n Description here"
+    details.innerText = "Description here \n Description here";
     template.appendChild(details)
+    let editTodo = document.createElement("div");
+    editTodo.classList.add("edit-todo", "text-right");
+    editTodo.innerHTML = `
+    <span><button class="btn btn-success">&#x2714;</button></span>
+    <span><button class="btn btn-danger">&#x2715;</button></span>
+    <span><button class="btn btn-primary">&#x270E;</button></span>`;
+    template.appendChild(editTodo);
+    if (todo.completed) {
+      template.classList.add('completed');
+    }
     todosDiv.appendChild(template);
   });
 }
