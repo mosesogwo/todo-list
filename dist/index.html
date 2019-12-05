@@ -21,10 +21,12 @@
           </div>
             <button type="submit" class="btn btn-primary btn-block">Create project</button>
         </form>
+        <div class="mt-4 list-group project">
+        </div>
       </div>
       <div class="col-9 border-left">
         <h4 class="text-center"><button type="button" class="btn btn-primary new-todo">+</button> To-do List</h4>
-        <div class="forms flex-d justify-content-center">
+        <div class="col-8 offset-2 forms flex-d justify-content-center">
             <form class="new-todo-form bg-primary text-light p-2 hidden">
                 <div class="form-group">
                   <label for="title">Title:</label>
@@ -54,35 +56,29 @@
             </form>
       
           </div>
+          <div class="mt-4 list-group todos">
+            <a href="#" class="list-group-item list-group-item-action">
+              <h5>List 1</h5>
+              <p>Description</p>
+              <div class="edit-todo text-right">
+                <span><button class="btn btn-success">&#x2714;</button></span>
+                <span><button class="btn btn-danger">&#x2715;</button></span>
+                <span><button class="btn btn-primary">&#x270E;</button></span>
+              </div>
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action">List 2</a>
+            <a href="#" class="list-group-item list-group-item-action">List 3</a>
+          </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-3 border-right">
-          <div class="mt-4 list-group project">
-            <!-- <a href="#" class="list-group-item list-group-item-action active">
-              Project 1 <span class="badge badge-primary badge-pill">3</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">Project 2
-                <span class="badge badge-primary badge-pill">1</span></a>
-            <a href="#" class="list-group-item list-group-item-action">Project 3 <span class="badge badge-primary badge-pill"></span></a> -->
-          </div>
+          
       </div>
       <div class="col-9 border-left list">
-          <div class="mt-4 list-group todos">
-              <a href="#" class="list-group-item list-group-item-action">
-                <h5>List 1</h5>
-                <p>Description</p>
-                <div class="edit-todo text-right">
-                  <span><button class="btn btn-success">&#x2714;</button></span>
-                  <span><button class="btn btn-danger">&#x2715;</button></span>
-                  <span><button class="btn btn-primary">&#x270E;</button></span>
-                </div>
-              </a>
-
-              <a href="#" class="list-group-item list-group-item-action">List 2</a>
-              <a href="#" class="list-group-item list-group-item-action">List 3</a>
-            </div>
+          
       </div>
     </div>
 
