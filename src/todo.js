@@ -13,7 +13,7 @@ const todo = (title, description, dueDate, priority) => {
         priority = pVlaue;
     };
 
-    return { getTitle, getDescription, getDueDate, getPriority, toggleComplete, changePriority };
+    return { title, getTitle, getDescription, getDueDate, getPriority, toggleComplete, changePriority };
   };
 
   export default todo;

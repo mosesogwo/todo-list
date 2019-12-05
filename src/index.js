@@ -1,8 +1,9 @@
 import './style.css';
 import todo from './todo';
-import { project, save, setActiveProjectId, getActiveProject } from './project';
+import { project, save, setActiveProjectId, getActiveProject, render } from './project';
 
 const pageLoad = () => {
+  // render();
   const newProjectBtn = document.querySelector('.new-project');
   const newProjectForm = document.querySelector('.new-project-form');
   const newTodoBtn = document.querySelector('.new-todo');
@@ -51,3 +52,4 @@ const pageLoad = () => {
 }
 
 pageLoad();
+render();

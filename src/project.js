@@ -13,6 +13,10 @@ const project = (name) => {
 const save = () => {
   localStorage.setItem('projects_key', JSON.stringify(projects));
   localStorage.setItem('active_project_id_key', JSON.stringify(activeProjectId));
+  render();
+}
+
+const render = () => {
   renderProjects();
   renderTodos();
 }
@@ -25,13 +29,20 @@ const getActiveProject = () => {
   return projects.find(project => project.id === activeProjectId);
 }
 
+const clearContainer = (container) => {
+  while(container.firstChild) {
+    container.firstChild.remove();
+  }
+}
+
 const renderProjects = () => {
   const projectsDiv = document.querySelector('.project');
-  projectsDiv.innerHTML = '';
+  clearContainer(projectsDiv);
   projects.forEach((project) => {
     let template = document.createElement("a");
     template.classList.add("list-group-item", "list-group-item-action");
     template.setAttribute("data-id", `${project.id}`);
+    template.setAttribute('href','#');
     template.innerHTML = `${ project.name } <span class="badge badge-primary badge-pill">${ project.todos.length }</span>`;
     if (project.id === activeProjectId) {
       template.classList.add("active");
@@ -41,15 +52,16 @@ const renderProjects = () => {
 }
 
 const renderTodos = () => {
-  const activeProject = projects.find(project => project.id === activeProjectId);
+  const activeProject = getActiveProject();
   const todosDiv = document.querySelector('.todos');
+  clearContainer(todosDiv);
   activeProject.todos.forEach((todo) => {
     let template = document.createElement("a");
     template.setAttribute('href','#');
     template.classList.add("list-group-item", "list-group-item-action");
-    template.innerHTML = `${todo.title}`;
+    template.innerHTML = `${ todo.title }`;
     todosDiv.appendChild(template);
   });
 }
 
-export { project, projects, save, renderProjects, activeProjectId, setActiveProjectId, getActiveProject};
+export { project, projects, save, render, activeProjectId, setActiveProjectId, getActiveProject};
