@@ -60,6 +60,10 @@ const renderTodos = () => {
     template.setAttribute('href','#');
     template.classList.add("list-group-item", "list-group-item-action");
     template.innerHTML = `${ todo.title }`;
+    let details = document.createElement("p");
+    details.classList.add("hidden");
+    details.innerText = "Description here \n Description here"
+    template.appendChild(details)
     todosDiv.appendChild(template);
   });
 }

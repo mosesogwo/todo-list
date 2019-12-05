@@ -3,12 +3,12 @@ import todo from './todo';
 import { project, save, setActiveProjectId, getActiveProject, render } from './project';
 
 const pageLoad = () => {
-  // render();
   const newProjectBtn = document.querySelector('.new-project');
   const newProjectForm = document.querySelector('.new-project-form');
   const newTodoBtn = document.querySelector('.new-todo');
   const newTodoForm = document.querySelector('.new-todo-form');
   const projectsContainer = document.querySelector('.project');
+  const todosContainer = document.querySelector('.todos')
 
   newProjectBtn.addEventListener('click', () => {
     newProjectForm.classList.toggle('hidden');
@@ -49,6 +49,13 @@ const pageLoad = () => {
       save();
     }
   });
+
+  todosContainer.addEventListener('click', (event) => {
+    if (event.target.tagName.toLowerCase() === "a") {
+      const details = event.target.querySelector('p');
+      details.classList.toggle('hidden');
+    }
+  })
 }
 
 pageLoad();
