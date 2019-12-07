@@ -11,7 +11,6 @@ clearContainer(todosDiv);
 
 activeProject.todos.forEach((todo, idx) => {
   let template = document.createElement("a");
-  template.setAttribute('href','#');
   template.setAttribute('id', `${ idx }`);
   template.classList.add("list-group-item", "list-group-item-action");
   template.innerHTML = `<h4>${ todo.getTitle() }</h4>`;
@@ -19,14 +18,16 @@ activeProject.todos.forEach((todo, idx) => {
   details.innerText = `${ todo.getDescription() }`;
   template.appendChild(details);
   let editTodo = document.createElement("div");
-  editTodo.classList.add("edit-todo", "text-right");
+  editTodo.classList.add("edit", "text-right");
   editTodo.innerHTML = `
-  <span><button class="btn btn-success">&#x2714;</button></span>
-  <span><button class="btn btn-danger">&#x2715;</button></span>
-  <span><button class="btn btn-primary">&#x270E;</button></span>`;
+  <span><button class="btn btn-success complete-todo">&#x2714;</button></span>
+  <span><button class="btn btn-danger delete-todo">&#x2715;</button></span>
+  <span><button class="btn btn-primary edit-todo">&#x270E;</button></span>`;
   template.appendChild(editTodo);
-  if (todo.isComplete === true) {
+  if (todo.isComplete() === true) {
     template.classList.add('completed');
+    template.children[0].classList.toggle('completed');
+    template.children[1].classList.toggle('completed');
   }
   todosDiv.appendChild(template);
 });
@@ -35,6 +36,9 @@ activeProject.todos.forEach((todo, idx) => {
 const renderProjects = () => {
   const projectsDiv = document.querySelector('.project');
   clearContainer(projectsDiv);
+  if (activeProjectId === '') {
+    activeProjectId = projects[0].id;
+  }
   projects.forEach((project) => {
     let template = document.createElement("a");
     template.classList.add("list-group-item", "list-group-item-action");
@@ -87,8 +91,8 @@ const pageLoad = () => {
   const newTodoBtn = document.querySelector('.new-todo');
   const newTodoForm = document.querySelector('.new-todo-form');
   const projectsContainer = document.querySelector('.project');
-  const todosContainer = document.querySelector('.list');
-  const editTodo = document.querySelector('.edit-todo');
+  const todosContainer = document.querySelector('.todos');
+  const completeTodo = document.querySelector('.complete-todo');
 
   newProjectBtn.addEventListener('click', () => {
     clearForm(newProjectForm);
@@ -133,19 +137,24 @@ const pageLoad = () => {
   });
 
   todosContainer.addEventListener('click', (event) => {
-    if (event.target.tagName.toLowerCase() === "h4" || 
-    event.target.tagName.toLowerCase() === "p") {
-      const details = event.target.parentNode.querySelector('p');
-      details.classList.toggle('hidden');
-    }
-
-    if (event.target.classList.contains("btn-success")) {
+    if (event.target.classList.contains("complete-todo")) {
+      const todoBody = event.target.parentNode.parentNode.parentNode;
+      const todoTitle = todoBody.children[0].innerHTML;
       let activeProject = getActiveProject();
-      let idx = event.target.parentNode.parentNode.parentNode.id;
-      activeProject.todos[idx].toggleComplete();
+      let clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
+      clickedTodo.toggleComplete();
       save();
     }
-  })
+    if (event.target.classList.contains("delete-todo")) {
+      const todoBody = event.target.parentNode.parentNode.parentNode;
+      const todoTitle = todoBody.children[0].innerHTML;
+      let activeProject = getActiveProject();
+      let clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
+      activeProject.todos.splice(activeProject.todos.indexOf(clickedTodo),1);
+      save();
+    }
+  });
+
 }
 
 pageLoad();
