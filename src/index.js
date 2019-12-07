@@ -2,22 +2,22 @@ import './style.css';
 import todo from './todo';
 import { project, projects } from './project';
 
-let activeProjectId = JSON.parse(localStorage.getItem('active_project_id_key'));
+let activeProjectId = '';
 
 const renderTodos = () => {
 const activeProject = getActiveProject();
 const todosDiv = document.querySelector('.todos');
 clearContainer(todosDiv);
+
 activeProject.todos.forEach((todo, idx) => {
   let template = document.createElement("a");
   template.setAttribute('href','#');
   template.setAttribute('id', `${ idx }`);
   template.classList.add("list-group-item", "list-group-item-action");
-  template.innerHTML = `<h4>${ todo.title }</h4>`;
+  template.innerHTML = `<h4>${ todo.getTitle() }</h4>`;
   let details = document.createElement("p");
-  details.classList.add("hidden");
-  details.innerText = "Description here \n Description here";
-  template.appendChild(details)
+  details.innerText = `${ todo.getDescription() }`;
+  template.appendChild(details);
   let editTodo = document.createElement("div");
   editTodo.classList.add("edit-todo", "text-right");
   editTodo.innerHTML = `
@@ -25,7 +25,7 @@ activeProject.todos.forEach((todo, idx) => {
   <span><button class="btn btn-danger">&#x2715;</button></span>
   <span><button class="btn btn-primary">&#x270E;</button></span>`;
   template.appendChild(editTodo);
-  if (todo.completed) {
+  if (todo.isComplete === true) {
     template.classList.add('completed');
   }
   todosDiv.appendChild(template);
@@ -54,8 +54,8 @@ const render = () => {
 };
 
 const save = () => {
-  localStorage.setItem('projects_key', JSON.stringify(projects));
-  localStorage.setItem('active_project_id_key', JSON.stringify(activeProjectId));
+  // localStorage.setItem('projects_key', JSON.stringify(projects));
+  // localStorage.setItem('active_project_id_key', JSON.stringify(activeProjectId));
   render();
 };
 
@@ -98,7 +98,7 @@ const pageLoad = () => {
     event.preventDefault();
     const name = newProjectForm.querySelector('#projectName').value;
     if ( name !== "") {
-      const newProject = project(name);
+      let newProject = project(name);
       newProject.addToProjects();
       clearForm(newProjectForm);
       save();

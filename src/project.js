@@ -1,4 +1,4 @@
-const projects = JSON.parse(localStorage.getItem('projects_key')) || [];
+const projects = [];
 
 const project = (name) => {
   const todos = [];
