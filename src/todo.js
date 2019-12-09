@@ -10,6 +10,10 @@ const todo = (title, description, dueDate, priority) => {
         completed = !completed;
     };
 
+    const getTodoData = () => {
+      return { title, description, dueDate, priority, completed };
+    }
+
     const changePriority = (pVlaue) => {
         priority = pVlaue;
     };
@@ -26,7 +30,7 @@ const todo = (title, description, dueDate, priority) => {
         dueDate = pDate;
     };
 
-    return { getTitle, getDescription, getDueDate, getPriority, isComplete, toggleComplete, changePriority, changeDescription, changeTitle, changeDueDate };
+    return { getTitle, getDescription, getDueDate, getPriority, isComplete, toggleComplete, getTodoData, changePriority, changeDescription, changeTitle, changeDueDate };
   };
 
   export default todo;
