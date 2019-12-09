@@ -1,4 +1,3 @@
-/* global document */
 import todo from './todo';
 
 /* eslint-disable no-param-reassign */
