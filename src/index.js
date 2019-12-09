@@ -1,3 +1,5 @@
+/* eslint-env browser */
+
 import './style.css';
 import todo from './todo';
 import { project, projects, prepareForStorage } from './project';
@@ -8,7 +10,7 @@ const setActiveProjectId = (value) => {
   activeProjectId = value;
 };
 
-const getActiveProject = () => projects.find((p) => p.id === activeProjectId);
+const getActiveProject = () => projects.find(p => p.id === activeProjectId);
 
 const clearContainer = (container) => {
   while (container.firstChild) {
@@ -182,7 +184,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
       activeProject.todos.splice(activeProject.todos.indexOf(clickedTodo), 1);
       save();
     }
@@ -190,7 +192,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
       const editTodoForm = todoBody.querySelector('.edit-todo-form');
       editTodoForm.querySelector('#title').value = clickedTodo.getTitle();
       editTodoForm.querySelector('#desc').value = clickedTodo.getDescription();
