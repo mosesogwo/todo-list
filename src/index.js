@@ -1,5 +1,4 @@
-/* eslint-env browser */
-
+/* global document */
 import './style.css';
 import todo from './todo';
 import { project, projects, prepareForStorage } from './project';
