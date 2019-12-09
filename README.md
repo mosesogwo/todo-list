@@ -23,7 +23,7 @@ To get a local copy up and running follow these simple example steps.
 
  - Run ```cd todo-list``` to move into the app directory.
 
- - Open the dist/index.html file in your browser.
+ - Open the ```dist/index.html``` file in your browser.
 
 
 
