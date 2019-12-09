@@ -1,5 +1,6 @@
 import todo from './todo';
 
+/* eslint-disable no-param-reassign */
 const retrieveProjects = () => {
   const storedProjects = JSON.parse(localStorage.getItem('projects_key')) || [];
   const newProjects = JSON.parse(JSON.stringify(storedProjects));

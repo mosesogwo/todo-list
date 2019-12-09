@@ -14,6 +14,7 @@ const todo = (title, description, dueDate, priority) => {
     title, description, dueDate, priority, completed,
   });
 
+  /* eslint-disable no-param-reassign */
   const changePriority = (pVlaue) => {
     priority = pVlaue;
   };
