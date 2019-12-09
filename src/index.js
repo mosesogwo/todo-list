@@ -118,7 +118,7 @@ const pageLoad = () => {
   const newTodoForm = document.querySelector('.new-todo-form');
   const projectsContainer = document.querySelector('.project');
   const todosContainer = document.querySelector('.todos');
-  const completeTodo = document.querySelector('.complete-todo');
+  const deleteProjectBtn = document.querySelector('.delete-project');
 
   newProjectBtn.addEventListener('click', () => {
     clearForm(newProjectForm);
@@ -134,6 +134,13 @@ const pageLoad = () => {
       clearForm(newProjectForm);
       save();
     } 
+  });
+
+  deleteProjectBtn.addEventListener('click', () => {
+    const pToDelete = getActiveProject();
+    const pToDeleteIdx = projects.findIndex((p) => p.id === pToDelete.id);
+    projects.splice(pToDeleteIdx, 1);
+    save();
   });
 
   newTodoBtn.addEventListener('click', () => {
@@ -186,6 +193,10 @@ const pageLoad = () => {
       let activeProject = getActiveProject();
       let clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
       const editTodoForm = todoBody.querySelector('.edit-todo-form');
+      editTodoForm.querySelector('#title').value = clickedTodo.getTitle();
+      editTodoForm.querySelector('#desc').value = clickedTodo.getDescription();
+      editTodoForm.querySelector('#date').value = clickedTodo.getDueDate();
+      editTodoForm.querySelector('#priority').value = clickedTodo.getPriority();
       editTodoForm.classList.toggle('hidden');
 
       editTodoForm.addEventListener('submit', (event) => {
