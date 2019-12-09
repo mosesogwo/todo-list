@@ -1,6 +1,6 @@
 import './style.css';
 import todo from './todo';
-import { project, projects } from './project';
+import { project, projects, prepareForStorage } from './project';
 
 let activeProjectId = '';
 
@@ -85,8 +85,7 @@ const render = () => {
 };
 
 const save = () => {
-  // localStorage.setItem('projects_key', JSON.stringify(projects));
-  // localStorage.setItem('active_project_id_key', JSON.stringify(activeProjectId));
+  localStorage.setItem('projects_key', JSON.stringify(prepareForStorage()));
   render();
 };
 
