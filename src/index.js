@@ -138,7 +138,7 @@ const pageLoad = () => {
 
   deleteProjectBtn.addEventListener('click', () => {
     const pToDelete = getActiveProject();
-    const pToDeleteIdx = projects.findIndex((p) => p.id === pToDelete.id);
+    const pToDeleteIdx = projects.findIndex(p => p.id === pToDelete.id);
     projects.splice(pToDeleteIdx, 1);
     save();
   });
@@ -175,7 +175,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
       clickedTodo.toggleComplete();
       save();
     }
