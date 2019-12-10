@@ -8,7 +8,7 @@ const setActiveProjectId = (value) => {
   activeProjectId = value;
 };
 
-const getActiveProject = () => projects.find((p) => p.id === activeProjectId);
+const getActiveProject = () => projects.find(p => p.id === activeProjectId);
 
 const clearContainer = (container) => {
   while (container.firstChild) {
@@ -140,7 +140,7 @@ const pageLoad = () => {
   deleteProjectBtn.addEventListener('click', () => {
     const pToDelete = getActiveProject();
     if (pToDelete) {
-      const pToDeleteIdx = projects.findIndex((p) => p.id === pToDelete.id);
+      const pToDeleteIdx = projects.findIndex(p => p.id === pToDelete.id);
       projects.splice(pToDeleteIdx, 1);
       save();
     }
@@ -186,7 +186,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
       activeProject.todos.splice(activeProject.todos.indexOf(clickedTodo), 1);
       save();
     }
@@ -194,7 +194,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
       const editTodoForm = todoBody.querySelector('.edit-todo-form');
       editTodoForm.querySelector('#title').value = clickedTodo.getTitle();
       editTodoForm.querySelector('#desc').value = clickedTodo.getDescription();
