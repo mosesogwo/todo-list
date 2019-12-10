@@ -8,7 +8,7 @@ const setActiveProjectId = (value) => {
   activeProjectId = value;
 };
 
-const getActiveProject = () => projects.find(p => p.id === activeProjectId);
+const getActiveProject = () => projects.find((p) => p.id === activeProjectId);
 
 const clearContainer = (container) => {
   while (container.firstChild) {
@@ -22,55 +22,57 @@ const renderTodos = () => {
   const todosDiv = document.querySelector('.todos');
   clearContainer(todosDiv);
 
-  activeProject.todos.forEach((td, idx) => {
-    const template = document.createElement('a');
-    template.setAttribute('id', `${idx}`);
-    template.classList.add('list-group-item', 'list-group-item-action');
-    template.innerHTML = `<h4>${td.getTitle()}</h4>`;
-    const details = document.createElement('p');
-    details.innerText = `${td.getDescription()}`;
-    const dueDate = document.createElement('p');
-    dueDate.innerText = `On: ${td.getDueDate()}`;
-    const priority = document.createElement('p');
-    priority.innerText = `Priority: ${td.getPriority()}`;
-    template.appendChild(details);
-    template.appendChild(dueDate);
-    template.appendChild(priority);
-    const editTodo = document.createElement('div');
-    editTodo.classList.add('edit', 'text-right');
-    editTodo.innerHTML = `
-  <span><button class="btn btn-success complete-todo">&#x2714;</button></span>
-  <span><button class="btn btn-danger delete-todo">&#x2715;</button></span>
-  <span><button class="btn btn-primary edit-todo">&#x270E;</button></span>
-  <form class="edit-todo-form bg-primary text-light p-2 hidden">
-    <label for="title">Title:</label>
-    <input type="text" class="form-control" id="title" placeholder="Edit todo title">
-    
-    <label for="desc">Details:</label>
-    <textarea type="text" class="form-control" id="desc" placeholder="Edit description of activity" rows="3"></textarea>
-
-    <label for="date">Due Date:</label>
-    <input type="date" class="form-control" id="date" placeholder="Edit due date"></textarea>
+  if (activeProject) {
+    activeProject.todos.forEach((td, idx) => {
+      const template = document.createElement('a');
+      template.setAttribute('id', `${idx}`);
+      template.classList.add('list-group-item', 'list-group-item-action');
+      template.innerHTML = `<h4>${td.getTitle()}</h4>`;
+      const details = document.createElement('p');
+      details.innerText = `${td.getDescription()}`;
+      const dueDate = document.createElement('p');
+      dueDate.innerText = `On: ${td.getDueDate()}`;
+      const priority = document.createElement('p');
+      priority.innerText = `Priority: ${td.getPriority()}`;
+      template.appendChild(details);
+      template.appendChild(dueDate);
+      template.appendChild(priority);
+      const editTodo = document.createElement('div');
+      editTodo.classList.add('edit', 'text-right');
+      editTodo.innerHTML = `
+    <span><button class="btn btn-success complete-todo">&#x2714;</button></span>
+    <span><button class="btn btn-danger delete-todo">&#x2715;</button></span>
+    <span><button class="btn btn-primary edit-todo">&#x270E;</button></span>
+    <form class="edit-todo-form bg-primary text-light p-2 hidden">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" placeholder="Edit todo title">
       
-    <label for="priority">Priority</label>
-      <select class="form-control" id="priority">
-        <option value="low">Low</option>
-        <option value="normal">Normal</option>
-        <option value="high">High</option>
-      </select>
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-  </form>`;
+      <label for="desc">Details:</label>
+      <textarea type="text" class="form-control" id="desc" placeholder="Edit description of activity" rows="3"></textarea>
+  
+      <label for="date">Due Date:</label>
+      <input type="date" class="form-control" id="date" placeholder="Edit due date"></textarea>
+        
+      <label for="priority">Priority</label>
+        <select class="form-control" id="priority">
+          <option value="low">Low</option>
+          <option value="normal">Normal</option>
+          <option value="high">High</option>
+        </select>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>`;
 
-    template.appendChild(editTodo);
-    if (td.isComplete() === true) {
-      template.classList.add('completed');
-      template.children[0].classList.toggle('completed');
-      template.children[1].classList.toggle('completed');
-      template.children[2].classList.toggle('completed');
-      template.children[3].classList.toggle('completed');
-    }
-    todosDiv.appendChild(template);
-  });
+      template.appendChild(editTodo);
+      if (td.isComplete() === true) {
+        template.classList.add('completed');
+        template.children[0].classList.toggle('completed');
+        template.children[1].classList.toggle('completed');
+        template.children[2].classList.toggle('completed');
+        template.children[3].classList.toggle('completed');
+      }
+      todosDiv.appendChild(template);
+    });
+  }
 };
 
 const renderProjects = () => {
@@ -137,9 +139,11 @@ const pageLoad = () => {
 
   deleteProjectBtn.addEventListener('click', () => {
     const pToDelete = getActiveProject();
-    const pToDeleteIdx = projects.findIndex(p => p.id === pToDelete.id);
-    projects.splice(pToDeleteIdx, 1);
-    save();
+    if (pToDelete) {
+      const pToDeleteIdx = projects.findIndex((p) => p.id === pToDelete.id);
+      projects.splice(pToDeleteIdx, 1);
+      save();
+    }
   });
 
   newTodoBtn.addEventListener('click', () => {
@@ -174,7 +178,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
       clickedTodo.toggleComplete();
       save();
     }
@@ -182,7 +186,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
       activeProject.todos.splice(activeProject.todos.indexOf(clickedTodo), 1);
       save();
     }
@@ -190,7 +194,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
       const editTodoForm = todoBody.querySelector('.edit-todo-form');
       editTodoForm.querySelector('#title').value = clickedTodo.getTitle();
       editTodoForm.querySelector('#desc').value = clickedTodo.getDescription();
