@@ -178,7 +178,7 @@ const pageLoad = () => {
       const todoBody = event.target.parentNode.parentNode.parentNode;
       const todoTitle = todoBody.children[0].innerHTML;
       const activeProject = getActiveProject();
-      const clickedTodo = activeProject.todos.find((t) => t.getTitle() === todoTitle);
+      const clickedTodo = activeProject.todos.find(t => t.getTitle() === todoTitle);
       clickedTodo.toggleComplete();
       save();
     }
